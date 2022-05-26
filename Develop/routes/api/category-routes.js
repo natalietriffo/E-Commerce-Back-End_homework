@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   // find all categories
   // be sure to include its associated Products
 Category.findAll({
-  include:[{model: Product}]
+  include:[Product],
 })
 .then ((categories)=>res.json(categories))
 .catch((error)=> res.status(500).json(error))
@@ -18,9 +18,9 @@ router.get('/:id', (req, res) => {
   // be sure to include its associated Products
   Category.findOne({
     where:{
-      id: req.params.id
+      id: req.params.id,
     },
-    include:[{model: Product}]
+    include:[Product],
   })
   .then ((category)=>res.json(category))
 .catch((error)=> res.status(500).json(error))
@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
   // create a new category
 Category.create(req.body)
 .then ((category)=>res.json(category))
-.catch((error)=> res.status(500).json(error))
+.catch((error)=> res.status(400).json(error))
 
 });
 
@@ -42,7 +42,7 @@ router.put('/:id', (req, res) => {
     },
   })
   .then ((category)=>res.json(category))
-  .catch((error)=> res.status(500).json(error))
+  .catch((error)=> res.status(400).json(error))
 });
 
 router.delete('/:id', (req, res) => {
@@ -53,7 +53,7 @@ router.delete('/:id', (req, res) => {
     },
   })
   .then ((category)=>res.json(category))
-  .catch((error)=> res.status(500).json(error))
+  .catch((error)=> res.status(400).json(error))
 });
 
 module.exports = router;

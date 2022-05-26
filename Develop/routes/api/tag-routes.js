@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
     },
     include:[{
       model: Product,
-      through: ProductTag
+      through: ProductTag,
     }]
   })
   .then ((tag)=>res.json(tag))
